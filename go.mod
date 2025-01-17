@@ -3,9 +3,6 @@ module common_user
 go 1.23
 
 require (
-)
-
-require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.61.18 // indirect
 	github.com/apache/thrift v0.13.0 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
@@ -48,7 +45,7 @@ require (
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/wxl-server/common v0.0.0-20250117062117-5a3e73943268 // indirect
-	github.com/wxl-server/idl_gen v0.0.0-20250117062142-9338f1dcad38 // indirect
+	github.com/wxl-server/idl_gen v0.0.0-20250117064817-a1742ae701f2 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect
