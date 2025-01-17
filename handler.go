@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+
 	common_user "github.com/wxl-server/idl_gen/kitex_gen/common_user"
 )
 
