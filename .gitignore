@@ -80,3 +80,5 @@ fabric.properties
 /.idea/CodeverseWorkspaceAppSettings.xml
 /.idea/common_user.iml
 /.idea/modules.xml
+!/log/
+/log/
