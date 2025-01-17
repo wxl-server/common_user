@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	common_user "github.com/qcq1/idl_gen/kitex_gen/common_user"
+	common_user "github.com/wxl-server/idl_gen/kitex_gen/common_user"
 )
 
 var handler common_user.CommonUser

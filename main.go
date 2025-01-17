@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/qcq1/common/wxl_cluster"
-	common_user "github.com/qcq1/idl_gen/kitex_gen/common_user/commonuser"
+	"github.com/wxl-server/common/wxl_cluster"
+	common_user "github.com/wxl-server/idl_gen/kitex_gen/common_user/commonuser"
 )
 
 func main() {
