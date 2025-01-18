@@ -1,14 +1,15 @@
 package main
 
 import (
+	"common_user/sal/dao/generator/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gen"
 	"gorm.io/gorm"
 )
 
 func main() {
-	modelGenerator()
-	//queryGenerator()
+	//modelGenerator()
+	queryGenerator()
 }
 
 func modelGenerator() {
@@ -36,7 +37,7 @@ func queryGenerator() {
 	db, _ := gorm.Open(mysql.Open("root:wxl5211314@tcp(wxl475.cn:32130)/common_user?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
 	g.UseDB(db)
 
-	//g.ApplyBasic(model.JobPO{})
+	g.ApplyBasic(model.UserPO{})
 
 	g.Execute()
 }

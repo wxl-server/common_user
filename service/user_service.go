@@ -30,6 +30,14 @@ func NewUserService(p Param) UserService {
 }
 
 func (u UserServiceImpl) SignUp(ctx context.Context, req *common_user.SignUpReq) (resp *common_user.SignUpResp, err error) {
+	count, err := u.p.UserRepo.CountUser(ctx, req.Email)
+	if err != nil {
+		return nil, err
+	}
+	if count > 0 {
+
+		return nil, common_user.ErrUserExist
+	}
 	id, err := u.p.UserRepo.SignUp(ctx, converter.SignUpReqDTO2DO(req))
 	if err != nil {
 		logger.CtxErrorf(ctx, "SignUp failed, err = %v", err)

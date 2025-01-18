@@ -4,7 +4,7 @@ go 1.23
 
 require (
 	github.com/bytedance/gopkg v0.1.1
-	github.com/wxl-server/common v0.0.0-20250117062117-5a3e73943268
+	github.com/wxl-server/common v0.0.0-20250117071444-472b85517a82
 	github.com/wxl-server/idl_gen v0.0.0-20250117064817-a1742ae701f2
 	go.uber.org/dig v1.18.0
 	gorm.io/driver/mysql v1.5.7
@@ -53,7 +53,6 @@ require (
 	github.com/nacos-group/nacos-sdk-go v1.1.5 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
-	github.com/qcq1/common v0.0.0-20250116144930-45384de212b8 // indirect
 	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/tidwall/gjson v1.17.3 // indirect
 	github.com/tidwall/match v1.1.1 // indirect

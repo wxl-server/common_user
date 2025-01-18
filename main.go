@@ -1,6 +1,7 @@
 package main
 
 import (
+	"common_user/sal/dao"
 	"common_user/service"
 	"context"
 
@@ -24,6 +25,11 @@ func InitContainer() {
 	// context
 	{
 		mustProvide(func() context.Context { return initCtx })
+	}
+
+	// db
+	{
+		mustInvoke(dao.InitDB)
 	}
 
 	// service
