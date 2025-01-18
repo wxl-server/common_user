@@ -1,29 +1,38 @@
 package main
 
 import (
+	"common_user/service"
 	"context"
 
 	common_user "github.com/wxl-server/idl_gen/kitex_gen/common_user"
+	"go.uber.org/dig"
 )
 
 var handler common_user.CommonUser
 
-// CommonUserImpl implements the last service interface defined in the IDL.
-type CommonUserImpl struct{}
-
-func NewHandler() common_user.CommonUser {
-	return &CommonUserImpl{}
+// Handler implements the last service interface defined in the IDL.
+type Handler struct {
+	p *Param
 }
 
-// SignUp implements the CommonUserImpl interface.
-func (s *CommonUserImpl) SignUp(ctx context.Context, req *common_user.SignUpReq) (resp *common_user.SignUpResp, err error) {
-	// TODO: Your code here...
-	// logger.CtxInfof(ctx, "req = %v", render.Render(req))
-	return
+type Param struct {
+	dig.In
+	UserService service.UserService
 }
 
-// Login implements the CommonUserImpl interface.
-func (s *CommonUserImpl) Login(ctx context.Context, req *common_user.LoginReq) (resp *common_user.LoginResp, err error) {
+func NewHandler(p *Param) {
+	handler = &Handler{
+		p: p,
+	}
+}
+
+// SignUp implements the Handler interface.
+func (s *Handler) SignUp(ctx context.Context, req *common_user.SignUpReq) (resp *common_user.SignUpResp, err error) {
+	return s.p.UserService.SignUp(ctx, req)
+}
+
+// Login implements the Handler interface.
+func (s *Handler) Login(ctx context.Context, req *common_user.LoginReq) (resp *common_user.LoginResp, err error) {
 	// TODO: Your code here...
 	return &common_user.LoginResp{
 		Token: "wxl555555",
