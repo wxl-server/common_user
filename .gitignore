@@ -82,3 +82,6 @@ fabric.properties
 /.idea/modules.xml
 !/log/
 /log/
+/.idea/.gitignore
+/.idea/dataSources.xml
+/.idea/vcs.xml
