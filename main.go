@@ -1,9 +1,12 @@
 package main
 
 import (
+	"common_user/repo"
+	"common_user/sal/config"
 	"common_user/sal/dao"
 	"common_user/service"
 	"context"
+	"github.com/wxl-server/common/reader"
 
 	"github.com/bytedance/gopkg/util/logger"
 	"github.com/wxl-server/common/render"
@@ -18,18 +21,30 @@ var (
 )
 
 func main() {
+	initContainer()
+
 	wxl_cluster.NewServer(common_user.NewServer, handler, "common_user", 8090)
 }
 
-func InitContainer() {
+func initContainer() {
 	// context
 	{
 		mustProvide(func() context.Context { return initCtx })
 	}
 
+	// config
+	{
+		mustProvide(reader.InitAppConfig[config.AppConfig])
+	}
+
 	// db
 	{
 		mustInvoke(dao.InitDB)
+	}
+
+	// repo
+	{
+		mustProvide(repo.NewUserRepo)
 	}
 
 	// service

@@ -12,7 +12,7 @@ var handler common_user.CommonUser
 
 // Handler implements the last service interface defined in the IDL.
 type Handler struct {
-	p *Param
+	p Param
 }
 
 type Param struct {
@@ -20,7 +20,7 @@ type Param struct {
 	UserService service.UserService
 }
 
-func NewHandler(p *Param) {
+func NewHandler(p Param) {
 	handler = &Handler{
 		p: p,
 	}

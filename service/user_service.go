@@ -1,6 +1,7 @@
 package service
 
 import (
+	"common_user/biz_error"
 	"common_user/domain/converter"
 	"common_user/repo"
 	"context"
@@ -35,12 +36,12 @@ func (u UserServiceImpl) SignUp(ctx context.Context, req *common_user.SignUpReq)
 		return nil, err
 	}
 	if count > 0 {
-
-		return nil, common_user.ErrUserExist
+		logger.CtxErrorf(ctx, "sign up failed, email has been used, email = %s", req.Email)
+		return nil, biz_error.SignUpError
 	}
-	id, err := u.p.UserRepo.SignUp(ctx, converter.SignUpReqDTO2DO(req))
+	id, err := u.p.UserRepo.CreateUser(ctx, converter.SignUpReqDTO2DO(req))
 	if err != nil {
-		logger.CtxErrorf(ctx, "SignUp failed, err = %v", err)
+		logger.CtxErrorf(ctx, "CreateUser failed, err = %v", err)
 		return nil, err
 	}
 	return &common_user.SignUpResp{
