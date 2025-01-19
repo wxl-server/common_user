@@ -13,6 +13,7 @@ import (
 
 type UserService interface {
 	SignUp(ctx context.Context, req *common_user.SignUpReq) (resp *common_user.SignUpResp, err error)
+	UpdatePassword(ctx context.Context, req *common_user.UpdatePasswordReq) (*common_user.UpdatePasswordResp, error)
 }
 
 type Param struct {
@@ -47,4 +48,8 @@ func (u UserServiceImpl) SignUp(ctx context.Context, req *common_user.SignUpReq)
 	return &common_user.SignUpResp{
 		Id: id,
 	}, nil
+}
+
+func (u UserServiceImpl) UpdatePassword(ctx context.Context, req *common_user.UpdatePasswordReq) (*common_user.UpdatePasswordResp, error) {
+	count, err := u.p.UserRepo.QueryUser(ctx, req.Email)
 }

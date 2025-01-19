@@ -5,7 +5,7 @@ go 1.23
 require (
 	github.com/bytedance/gopkg v0.1.1
 	github.com/wxl-server/common v0.0.0-20250119105135-1aa71218830d
-	github.com/wxl-server/idl_gen v0.0.0-20250117064817-a1742ae701f2
+	github.com/wxl-server/idl_gen v0.0.0-20250119120633-10c220b0dcb2
 	go.uber.org/dig v1.18.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gen v0.3.26

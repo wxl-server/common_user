@@ -31,6 +31,10 @@ func (s *Handler) SignUp(ctx context.Context, req *common_user.SignUpReq) (resp 
 	return s.p.UserService.SignUp(ctx, req)
 }
 
+func (s *Handler) UpdatePassword(ctx context.Context, req *common_user.UpdatePasswordReq) (r *common_user.UpdatePasswordResp, err error) {
+	return s.p.UserService.UpdatePassword(ctx, req)
+}
+
 // Login implements the Handler interface.
 func (s *Handler) Login(ctx context.Context, req *common_user.LoginReq) (resp *common_user.LoginResp, err error) {
 	// TODO: Your code here...
