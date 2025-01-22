@@ -51,5 +51,24 @@ func (u UserServiceImpl) SignUp(ctx context.Context, req *common_user.SignUpReq)
 }
 
 func (u UserServiceImpl) UpdatePassword(ctx context.Context, req *common_user.UpdatePasswordReq) (*common_user.UpdatePasswordResp, error) {
-	count, err := u.p.UserRepo.QueryUser(ctx, req.Email)
+	if req.OldPassword == req.Password {
+		logger.CtxErrorf(ctx, "UpdatePassword failed, err = %v", biz_error.UpdatePasswordError)
+		return nil, biz_error.UpdatePasswordError
+	}
+	do, err := u.p.UserRepo.QueryUser(ctx, req.Email)
+	if err != nil {
+		logger.CtxErrorf(ctx, "QueryUser failed, err = %v", err)
+		return nil, err
+	}
+	if do.Password != req.OldPassword {
+		logger.CtxErrorf(ctx, "UpdatePassword failed, err = %v", biz_error.UpdatePasswordError2)
+		return nil, biz_error.UpdatePasswordError2
+	}
+	do.Password = req.Password
+	err = u.p.UserRepo.UpdatePassword(ctx, do)
+	if err != nil {
+		logger.CtxErrorf(ctx, "UpdatePassword failed, err = %v", err)
+		return nil, err
+	}
+	return &common_user.UpdatePasswordResp{}, nil
 }

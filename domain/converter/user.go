@@ -24,3 +24,14 @@ func UserDO2PO(do *domain.UserDO) *model.UserPO {
 		UpdatedAt: do.UpdatedAt,
 	}
 }
+
+func UserPO2DO(po *model.UserPO) *domain.UserDO {
+	return &domain.UserDO{
+		ID:        po.ID,
+		Email:     po.Email,
+		Password:  po.Password,
+		Extra:     po.Extra,
+		CreatedAt: po.CreatedAt,
+		UpdatedAt: po.UpdatedAt,
+	}
+}
