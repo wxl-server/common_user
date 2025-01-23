@@ -2,13 +2,14 @@ package main
 
 import (
 	"common_user/sal/dao/generator/model"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gen"
 	"gorm.io/gorm"
 )
 
 func main() {
-	//modelGenerator()
+	modelGenerator()
 	queryGenerator()
 }
 

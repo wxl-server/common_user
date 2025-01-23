@@ -4,23 +4,17 @@
 
 package model
 
-import (
-	"time"
-
-	"gorm.io/gorm"
-)
-
 const TableNameUserPO = "users"
 
 // UserPO mapped from table <users>
 type UserPO struct {
-	ID        int64          `gorm:"column:id;primaryKey" json:"id"`
-	Email     string         `gorm:"column:email;not null" json:"email"`
-	Password  string         `gorm:"column:password;not null" json:"password"`
-	Extra     *string        `gorm:"column:extra" json:"extra"`
-	CreatedAt time.Time      `gorm:"column:created_at;not null;default:CURRENT_TIMESTAMP" json:"created_at"`
-	UpdatedAt time.Time      `gorm:"column:updated_at;not null;default:CURRENT_TIMESTAMP" json:"updated_at"`
-	DeletedAt gorm.DeletedAt `gorm:"column:deleted_at" json:"deleted_at"`
+	ID        int64   `gorm:"column:id;primaryKey" json:"id"`
+	Email     string  `gorm:"column:email;not null" json:"email"`
+	Password  string  `gorm:"column:password;not null" json:"password"`
+	Extra     *string `gorm:"column:extra" json:"extra"`
+	CreatedAt int64   `gorm:"column:created_at;not null" json:"created_at"`
+	UpdatedAt int64   `gorm:"column:updated_at;not null" json:"updated_at"`
+	DeletedAt *int64  `gorm:"column:deleted_at" json:"deleted_at"`
 }
 
 // TableName UserPO's table name
