@@ -35,7 +35,7 @@ func NewUserRepo(p Param) UserRepo {
 
 func (u UserRepoImpl) UpdatePassword(ctx context.Context, do *domain.UserDO) (err error) {
 	po := query.Q.UserPO
-	_, err = po.WithContext(ctx).Where(po.ID.Eq(do.ID)).UpdateSimple(po.Password.Value(do.Password))
+	_, err = po.WithContext(ctx).Where(po.ID.Eq(do.ID)).Update(po.Password, do.Password)
 	if err != nil {
 		logger.CtxErrorf(ctx, "UpdatePassword failed, err = %v", err)
 		return err
