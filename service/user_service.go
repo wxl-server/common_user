@@ -4,6 +4,7 @@ import (
 	"common_user/biz_error"
 	"common_user/domain/converter"
 	"common_user/repo"
+	"common_user/sal/jwt"
 	"context"
 
 	"github.com/bytedance/gopkg/util/logger"
@@ -14,6 +15,7 @@ import (
 type UserService interface {
 	SignUp(ctx context.Context, req *common_user.SignUpReq) (resp *common_user.SignUpResp, err error)
 	UpdatePassword(ctx context.Context, req *common_user.UpdatePasswordReq) (*common_user.UpdatePasswordResp, error)
+	Login(ctx context.Context, req *common_user.LoginReq) (resp *common_user.LoginResp, err error)
 }
 
 type Param struct {
@@ -71,4 +73,24 @@ func (u UserServiceImpl) UpdatePassword(ctx context.Context, req *common_user.Up
 		return nil, err
 	}
 	return &common_user.UpdatePasswordResp{}, nil
+}
+
+func (u UserServiceImpl) Login(ctx context.Context, req *common_user.LoginReq) (resp *common_user.LoginResp, err error) {
+	do, err := u.p.UserRepo.QueryUser(ctx, req.Email)
+	if err != nil {
+		logger.CtxErrorf(ctx, "QueryUser failed, err = %v", err)
+		return nil, biz_error.LoginError
+	}
+	if do.Password != req.Password {
+		logger.CtxErrorf(ctx, "login failed, password is wrong")
+		return nil, biz_error.LoginError2
+	}
+	token, err := jwt.GenerateToken(ctx, do.ID)
+	if err != nil {
+		logger.CtxErrorf(ctx, "login failed, err = %v", err)
+		return nil, biz_error.LoginError
+	}
+	return &common_user.LoginResp{
+		Token: token,
+	}, nil
 }

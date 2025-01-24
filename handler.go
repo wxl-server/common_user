@@ -37,8 +37,5 @@ func (s *Handler) UpdatePassword(ctx context.Context, req *common_user.UpdatePas
 
 // Login implements the Handler interface.
 func (s *Handler) Login(ctx context.Context, req *common_user.LoginReq) (resp *common_user.LoginResp, err error) {
-	// TODO: Your code here...
-	return &common_user.LoginResp{
-		Token: "wxl555555",
-	}, nil
+	return s.p.UserService.Login(ctx, req)
 }
