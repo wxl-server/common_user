@@ -16,6 +16,7 @@ type UserService interface {
 	SignUp(ctx context.Context, req *common_user.SignUpReq) (resp *common_user.SignUpResp, err error)
 	UpdatePassword(ctx context.Context, req *common_user.UpdatePasswordReq) (*common_user.UpdatePasswordResp, error)
 	Login(ctx context.Context, req *common_user.LoginReq) (resp *common_user.LoginResp, err error)
+	ValidateToken(ctx context.Context, req *common_user.ValidateTokenReq) (*common_user.ValidateTokenResp, error)
 }
 
 type Param struct {
@@ -92,5 +93,16 @@ func (u UserServiceImpl) Login(ctx context.Context, req *common_user.LoginReq) (
 	}
 	return &common_user.LoginResp{
 		Token: token,
+	}, nil
+}
+
+func (u UserServiceImpl) ValidateToken(ctx context.Context, req *common_user.ValidateTokenReq) (*common_user.ValidateTokenResp, error) {
+	claims, err := jwt.ValidateToken(ctx, req.GetToken())
+	if err != nil {
+		logger.CtxErrorf(ctx, "ValidateToken failed, err = %v", err)
+		return nil, err
+	}
+	return &common_user.ValidateTokenResp{
+		Claims: claims,
 	}, nil
 }

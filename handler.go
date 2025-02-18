@@ -10,7 +10,6 @@ import (
 
 var handler common_user.CommonUser
 
-// Handler implements the last service interface defined in the IDL.
 type Handler struct {
 	p Param
 }
@@ -26,16 +25,18 @@ func NewHandler(p Param) {
 	}
 }
 
-// SignUp implements the Handler interface.
 func (s *Handler) SignUp(ctx context.Context, req *common_user.SignUpReq) (resp *common_user.SignUpResp, err error) {
 	return s.p.UserService.SignUp(ctx, req)
 }
 
-func (s *Handler) UpdatePassword(ctx context.Context, req *common_user.UpdatePasswordReq) (r *common_user.UpdatePasswordResp, err error) {
+func (s *Handler) UpdatePassword(ctx context.Context, req *common_user.UpdatePasswordReq) (resp *common_user.UpdatePasswordResp, err error) {
 	return s.p.UserService.UpdatePassword(ctx, req)
 }
 
-// Login implements the Handler interface.
 func (s *Handler) Login(ctx context.Context, req *common_user.LoginReq) (resp *common_user.LoginResp, err error) {
 	return s.p.UserService.Login(ctx, req)
+}
+
+func (s *Handler) ValidateToken(ctx context.Context, req *common_user.ValidateTokenReq) (resp *common_user.ValidateTokenResp, err error) {
+	return s.p.UserService.ValidateToken(ctx, req)
 }
